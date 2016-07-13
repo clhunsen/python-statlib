@@ -1,23 +1,27 @@
 #!/usr/bin/env python
 
-from sys import version
+import sys
 from distutils.core import setup
 
-if version < '2.2.3':
+# force the statlib in this directory (for version detection)
+sys.path.insert(0, '.')
+import statlib
+
+if sys.version < '2.2.3':
     from distutils.dist import DistributionMetadata
     DistributionMetadata.classifiers = None
     DistributionMetadata.download_url = None
 
 setup( 
     name='statlib',
-    version='1.0.1',
+    version=statlib.version,
     description='A collection of statistical modules (stats.py, pstats.py, matfunc.py)',
-    author='Raymond Hettinger, Gary Strangman',
-    author_email='python@rcn.com, strang@nmr.mgh.harvard.edu',
+    author='Gary Strangman, Raymond Hettinger',
+    author_email='strang@nmr.mgh.harvard.edu,python@rcn.com',
     maintainer='Istvan Albert',
     maintainer_email='istvan.albert@gmail.com',
     url='http://python-statlib.googlecode.com/',
-    download_url="http://python-statlib.googlecode.com/files/statlib-1.0.1.tar.gz",
+    download_url="http://python-statlib.googlecode.com/files/statlib-%s.tar.gz" % statlib.version,
     packages = [ "statlib" ],
     classifiers=[
        'Development Status :: 5 - Production/Stable',
